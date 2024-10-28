@@ -10,4 +10,25 @@
       <ion-title size="large">Wizards</ion-title>
     </ion-toolbar>
   </ion-header>
+
+  <div class="m-4 tablet:m-8">
+    <ion-searchbar [(ngModel)]="searchInput" class="py-0 custom-searchbar mb-8" mode="ios" (ionInput)="filteredWizards()" placeholder="Search"></ion-searchbar>
+
+    <div class="space-y-4">
+      <!-- Refacto ngIf ngFor with control flow -->
+      @if (searchInput().length > 0) {
+        @for (wizard of filteredWizards(); track $index) {
+          <app-wizard-card [wizard]="wizard"></app-wizard-card>
+        }
+        @if (filteredWizards().length === 0) {
+          <p class="text-titlePrimary flex justify-center items-center">No wizards found.</p>
+        }
+      } @else if (searchInput().length <= 0){
+        @for (wizard of wizards(); track $index) {
+          <app-wizard-card [wizard]="wizard"></app-wizard-card>
+        }
+      }
+    </div>
+  </div>
+
 </ion-content>

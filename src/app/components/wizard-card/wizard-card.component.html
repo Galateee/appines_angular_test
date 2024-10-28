@@ -1,0 +1,14 @@
+<div class="p-5 bg-bgPrimary text-titlePrimary border border-borderPrimary rounded-lg shadow-lg font-semibold text-lg leading-6 sm:text-xl sm:leading-7 hover:cursor-pointer">
+  <div class="flex items-center">
+    <img
+      class="w-16 h-16 rounded-full object-cover"
+      src="{{ wizard.image || '/assets/blank-avatar-photo-place-holder.webp' }}"
+    />
+    <div class="flex-1 min-w-0 ms-4">
+      <p>{{ wizard.name }}</p>
+      <p class="text-textPrimary font-medium pt-1 sm:pt-2 line-clamp-2">
+        {{ wizard.alternate_names }}
+      </p>
+    </div>
+  </div>
+</div>
