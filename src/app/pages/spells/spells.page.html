@@ -12,23 +12,23 @@
   </ion-header>
 
   <div class="m-4 tablet:m-8">
-    <ion-searchbar [(ngModel)]="searchInput" class="py-0 custom-searchbar mb-8" mode="ios" (ionInput)="filterSpell()" placeholder="Search"></ion-searchbar>
+    <ion-searchbar [(ngModel)]="searchInput" class="py-0 custom-searchbar mb-8" mode="ios" (ionInput)="filteredSpells()" placeholder="Search"></ion-searchbar>
 
     <div class="space-y-4">
-      <!-- TODO : replace *ngIF by new Angular Control Flow @if / @else -->
-      <ng-container *ngIf="searchInput.length > 0">
-        <!--  TODO : replace *ngFor by new Angular Control Flow -->
-        <app-spell-card *ngFor="let spell of filteredSpells" [spell]="spell"></app-spell-card>
-        <!-- TODO : add empty message if no results -->
-      </ng-container>
-
-      <ng-container *ngIf="searchInput.length <= 0">
-        <!--  TODO : replace *ngFor by new Angular Control Flow -->
-        <app-spell-card *ngFor="let spell of spells" [spell]="spell"></app-spell-card>
-      </ng-container>
+      <!-- Refacto ngIf ngFor with control flow -->
+      @if (searchInput().length > 0) {
+        @for (spell of filteredSpells(); track $index) {
+          <app-spell-card [spell]="spell"></app-spell-card>
+        }
+        @if (filteredSpells().length === 0) {
+          <p class="text-white flex justify-center items-center">No spells found.</p>
+        }
+      } @else if (searchInput().length <= 0){
+        @for (spell of spells(); track $index) {
+          <app-spell-card [spell]="spell"></app-spell-card>
+        }
+      }
     </div>
-
-
   </div>
 
 </ion-content>

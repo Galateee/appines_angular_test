@@ -1,44 +1,29 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, computed, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import {IonContent, IonHeader, IonSearchbar, IonTitle, IonToolbar} from '@ionic/angular/standalone';
-import {HttpClient} from "@angular/common/http";
+import {IonContent, IonHeader, IonSearchbar, IonTitle, IonToolbar, IonItem } from '@ionic/angular/standalone';
 import {SpellCardComponent} from "../../components/spell-card/spell-card.component";
-import {Spell} from "../../models/spell";
+import { SpellsService } from 'src/app/services/spells.service';
 
 @Component({
   selector: 'app-spells',
   templateUrl: './spells.page.html',
   styleUrls: ['./spells.page.scss'],
   standalone: true,
-  imports: [IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule, SpellCardComponent, IonSearchbar]
+  imports: [IonItem, IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule, SpellCardComponent, IonSearchbar]
 })
-export class SpellsPage implements OnInit {
+export class SpellsPage {
 
-  // TODO : use signal
-  spells: Spell[] = [];
+  spells = this.spellsService.spellsSignal;
 
-  // TODO : use signal
-  searchInput: string = '';
+  searchInput = signal<string>('');
 
-  // TODO : use computed signal
-  protected filteredSpells: Spell[] = [];
-
-  constructor(private http: HttpClient) { }
-
-  ngOnInit() {
-    this.fetchSpells();
-  }
-
-  fetchSpells() {
-    // TODO : move in a specific service
-    this.http.get<Spell[]>('https://hp-api.onrender.com/api/spells').subscribe((res: Spell[]) => {
-      this.spells = res;
-    })
-  }
-
-  filterSpell() {
-    this.filteredSpells = this.spells.filter(spell => spell.name.toLowerCase().includes(this.searchInput.toLowerCase() || ''))
-  }
+  filteredSpells = computed(() =>
+    this.spells().filter(spell =>
+      spell.name.toLowerCase().includes(this.searchInput().toLowerCase())
+    )
+  );
+  
+  constructor(private spellsService: SpellsService) {}
 
 }
