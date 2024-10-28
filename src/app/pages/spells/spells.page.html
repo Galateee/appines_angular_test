@@ -21,7 +21,7 @@
           <app-spell-card [spell]="spell"></app-spell-card>
         }
         @if (filteredSpells().length === 0) {
-          <p class="text-white flex justify-center items-center">No spells found.</p>
+          <p class="text-titlePrimary flex justify-center items-center">No spells found.</p>
         }
       } @else if (searchInput().length <= 0){
         @for (spell of spells(); track $index) {
