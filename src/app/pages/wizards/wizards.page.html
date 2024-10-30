@@ -5,23 +5,23 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Wizards</ion-title>
-    </ion-toolbar>
-  </ion-header>
+  <div class="mx-5 tablet:mx-10">
+    <ion-header collapse="condense">
+      <ion-toolbar>
+        <ion-title size="large">Wizards</ion-title>
+      </ion-toolbar>
+    </ion-header>
 
-  <div class="m-4 tablet:m-8">
-    <ion-searchbar [(ngModel)]="searchInput" class="py-0 custom-searchbar mb-8" mode="ios" (ionInput)="filteredWizards()" placeholder="Search"></ion-searchbar>
+    <ion-searchbar [(ngModel)]="searchInput" class="py-0 custom-searchbar mb-10" mode="ios" (ionInput)="filteredWizards()" placeholder="Search"></ion-searchbar>
 
-    <div class="space-y-4">
-      <!-- Refacto ngIf ngFor with control flow -->
+    <div class="space-y-5 tablet:space-y-6">
       @if (searchInput().length > 0) {
         @for (wizard of filteredWizards(); track $index) {
           <app-wizard-card [wizard]="wizard"></app-wizard-card>
         }
+        <!-- if no result -->
         @if (filteredWizards().length === 0) {
-          <p class="text-titlePrimary flex justify-center items-center">No wizards found.</p>
+          <p class="text-white text-base tablet:text-xl font-medium flex justify-center items-center">No wizards found.</p>
         }
       } @else if (searchInput().length <= 0){
         @for (wizard of wizards(); track $index) {
@@ -30,5 +30,4 @@
       }
     </div>
   </div>
-
 </ion-content>

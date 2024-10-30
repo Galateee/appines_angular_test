@@ -17,18 +17,15 @@ import {chevronBackOutline} from 'ionicons/icons';
 })
 
 export class WizardDetailsPage implements OnInit {
+  // signal ???
   wizard!: Wizard;
   
-  constructor(
-    private route: ActivatedRoute, 
-    private wizardsService: WizardsService
-  ) { 
+  constructor(private route: ActivatedRoute, private wizardsService: WizardsService) { 
     addIcons({chevronBackOutline, });
   }
 
   ngOnInit(): void {
     const id = this.route.snapshot.paramMap.get('id');
-    
     if (id) {
       this.getWizardDetails(id);
     }
@@ -41,6 +38,9 @@ export class WizardDetailsPage implements OnInit {
     });
   }
 
+  ////////////////////////////////////////////////////////////////
+  // Transform the first letter to UPPERCASE
+  ////////////////////////////////////////////////////////////////
   private transformWizardData(wizard: Wizard): Wizard {
     return JSON.parse(
       JSON.stringify(wizard, (key, value) =>
@@ -49,6 +49,48 @@ export class WizardDetailsPage implements OnInit {
           : value
       )
     );
+  }
+
+  ////////////////////////////////////////////////////////////////
+  // Formating the alternative names
+  ////////////////////////////////////////////////////////////////
+  formatAlternateNames(alternate_names: string): string {
+    if (!Array.isArray(alternate_names) || alternate_names.length === 0) {
+      return '';
+    }
+    return alternate_names.map(name => name.trim()).join(' · ');
+  }
+  
+
+  ////////////////////////////////////////////////////////////////
+  // Formating the date
+  ////////////////////////////////////////////////////////////////
+  formatDate(dateString: string | null): string {
+    if (!dateString) {
+      return '-';
+    }
+
+    const months = [
+      'January', 'February', 'March', 'April', 'May', 'June',
+      'July', 'August', 'September', 'October', 'November', 'December'
+    ];
+
+    const [day, month, year] = dateString.split('-');
+    const monthIndex = parseInt(month, 10) - 1;
+
+    const suffix = this.getDateSuffix(parseInt(day, 10));
+
+    return `${months[monthIndex]} ${day}${suffix} ${year}`;
+  }
+
+  private getDateSuffix(day: number): string {
+    if (day >= 11 && day <= 13) return 'th';
+    switch (day % 10) {
+      case 1: return 'st';
+      case 2: return 'nd';
+      case 3: return 'rd';
+      default: return 'th';
+    }
   }
   
 }

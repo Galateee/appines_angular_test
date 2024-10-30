@@ -1,5 +1,5 @@
-import {Component, Input, OnInit} from '@angular/core';
-import {Spell} from "../../models/spell";
+import { Component, input } from '@angular/core';
+import { Spell } from "../../models/spell";
 
 @Component({
   selector: 'app-spell-card',
@@ -9,9 +9,8 @@ import {Spell} from "../../models/spell";
 })
 export class SpellCardComponent {
 
-  // TODO : migrate with new input signal
-  @Input({ required: true }) spell!: Spell;
-
+  spell = input.required<Spell>();
+  
   constructor() { }
 
 }

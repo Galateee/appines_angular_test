@@ -9,9 +9,7 @@ import { map, Observable } from 'rxjs';
 export class WizardsService {
   private wizards = signal<Wizard[]>([]);
 
-  constructor(private http:HttpClient) { 
-    this.fetchWizards();
-  }
+  constructor(private http:HttpClient) {}
 
   fetchWizards() {
     this.http.get<Wizard[]>('https://hp-api.onrender.com/api/characters').subscribe((res) => {

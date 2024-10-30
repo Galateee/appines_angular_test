@@ -1,16 +1,16 @@
 <div
-  class="p-5 bg-bgPrimary text-titlePrimary border border-borderPrimary rounded-lg shadow-lg font-semibold text-lg leading-6 sm:text-xl sm:leading-7 hover:cursor-pointer"
-  (click)="goToWizardDetails(wizard)"
+  class="p-[17px] bg-cards-bgPrimary border border-cards-borderPrimary rounded-lg shadow-lg hover:cursor-pointer"
+  (click)="goToWizardDetails(wizard())"
 >
   <div class="flex items-center">
     <img
       class="w-16 h-16 rounded-full object-cover"
-      src="{{ wizard.image || '/assets/blank-avatar-photo-place-holder.webp' }}"
+      src="{{ wizard().image || '/assets/blank-avatar-photo-place-holder.webp' }}"
     />
     <div class="flex-1 min-w-0 ms-4">
-      <p>{{ wizard.name }}</p>
-      <p class="text-textPrimary font-medium pt-1 sm:pt-2 line-clamp-2">
-        {{ wizard.alternate_names }}
+      <p class="text-cards-titlePrimary text-base tablet:text-xl font-bold font-montserrat">{{ wizard().name }}</p>
+      <p class="text-cards-textPrimary text-base tablet:text-xl font-medium line-clamp-2">
+        {{ formatAlternateNames(wizard().alternate_names) }}
       </p>
     </div>
   </div>

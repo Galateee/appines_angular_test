@@ -5,23 +5,24 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Spells</ion-title>
-    </ion-toolbar>
-  </ion-header>
+  <div class="mx-5 tablet:mx-10">
+    <ion-header collapse="condense">
+      <ion-toolbar>
+        <ion-title size="large">Spells</ion-title>
+      </ion-toolbar>
+    </ion-header>
+  
+    <ion-searchbar [(ngModel)]="searchInput" class="py-0 custom-searchbar mb-10" mode="ios" (ionInput)="filteredSpells()" placeholder="Search"></ion-searchbar>
 
-  <div class="m-4 tablet:m-8">
-    <ion-searchbar [(ngModel)]="searchInput" class="py-0 custom-searchbar mb-8" mode="ios" (ionInput)="filteredSpells()" placeholder="Search"></ion-searchbar>
-
-    <div class="space-y-4">
+    <div class="space-y-5 tablet:space-y-6">
       <!-- Refacto ngIf ngFor with control flow -->
       @if (searchInput().length > 0) {
         @for (spell of filteredSpells(); track $index) {
           <app-spell-card [spell]="spell"></app-spell-card>
         }
+        <!-- if no result -->
         @if (filteredSpells().length === 0) {
-          <p class="text-titlePrimary flex justify-center items-center">No spells found.</p>
+          <p class="text-white text-base tablet:text-xl font-medium flex justify-center items-center">No spells found.</p>
         }
       } @else if (searchInput().length <= 0){
         @for (spell of spells(); track $index) {
@@ -30,5 +31,4 @@
       }
     </div>
   </div>
-
 </ion-content>

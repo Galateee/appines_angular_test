@@ -8,9 +8,7 @@ import { Spell } from '../models/spell';
 export class SpellsService {
   private spells = signal<Spell[]>([]);
 
-  constructor(private http:HttpClient) { 
-    this.fetchSpells();
-  }
+  constructor(private http:HttpClient) {}
 
   fetchSpells() {
     this.http.get<Spell[]>('https://hp-api.onrender.com/api/spells').subscribe((res) => {

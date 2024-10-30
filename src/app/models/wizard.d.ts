@@ -4,7 +4,7 @@ export interface Wizard {
   alternate_names: string;
   image: string;
   gender: string;
-  dateOfBirth: Date;
+  dateOfBirth: string;
   ancestry: string;
   eyeColour: string;
   hairColour: string;

@@ -1,5 +1,5 @@
-import { Component, Input } from '@angular/core';
-import {Wizard} from "../../models/wizard";
+import { Component, input } from '@angular/core';
+import { Wizard } from "../../models/wizard";
 import { Router } from '@angular/router';
 
 @Component({
@@ -11,8 +11,7 @@ import { Router } from '@angular/router';
 })
 export class WizardCardComponent  {
 
-  // TODO : migrate with new input signal
-  @Input({ required: true }) wizard!: Wizard;
+  wizard = input.required<Wizard>();
 
   constructor(private router: Router) { }
 
@@ -20,4 +19,13 @@ export class WizardCardComponent  {
     this.router.navigate(['/wizard-details', wizard.id]);
   }
 
+  ////////////////////////////////////////////////////////////////
+  // Formating the alternative names
+  ////////////////////////////////////////////////////////////////
+  formatAlternateNames(alternate_names: string): string {
+    if (!Array.isArray(alternate_names) || alternate_names.length === 0) {
+      return '';
+    }
+    return alternate_names.map(name => name.trim()).join(' · ');
+  }
 }
