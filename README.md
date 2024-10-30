@@ -1,5 +1,5 @@
 
-# App'Ines Technical Test (Angular + Ionic / Typescript / TailwindCSS)
+# App'Ines Technical Test (Angular + Ionic / Typescript / TailwindCSS) done by Robin Vidal
 
 This repository is the Ionic project for App'ines technical test.
 It is an Ionic v8+ project, configured with Angular v18+ and TailwindCSS.
