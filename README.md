@@ -37,7 +37,7 @@ To set up this project locally, follow these steps:
 1. Clone this repository to your local machine:
 
 ```
-git clone git@bitbucket.org:appinesfr/appines_angular_test.git
+git clone git@github.com:Galateee/appines_angular_test.git
 ```
 
 2. Navigate to the project folder:
