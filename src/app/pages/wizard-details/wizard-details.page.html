@@ -1,13 +1,54 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>wizardDetails</ion-title>
-  </ion-toolbar>
-</ion-header>
-
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">wizardDetails</ion-title>
-    </ion-toolbar>
-  </ion-header>
+  @if(wizard){
+
+    <div class="relative">
+      <ion-toolbar class="absolute m-4 mt-12 tablet:m-8 tablet:mt-12">
+        <ion-buttons slot="start" class="items-center justify-center w-[48px] h-[48px] bg-[#2F4D53] border border-[#1E424A] rounded-lg shadow-lg">
+          <ion-back-button defaultHref="/" text="" icon="chevron-back-outline" style="color: white;"></ion-back-button>
+        </ion-buttons>
+      </ion-toolbar>
+      <img src="{{ wizard.image || '/assets/blank-avatar-photo-place-holder.webp' }}" class="w-full h-[340px] object-cover"  style="object-position: 50% 40%;"/>
+      <div class="absolute inset-x-0 bottom-[-1px] h-1/4 bg-gradient-to-b from-transparent to-[#132D32]"></div>
+    </div>
+
+    <div class="m-4 tablet:m-8">
+      <div class="pb-9">
+        <div class="pt-4">
+          <ion-title size="large" style="padding: 0px 0px;">{{wizard.name}}</ion-title>
+          <p class="pb-4 text-titlePrimary">{{wizard.alternate_names}}</p>
+        </div>
+        <div class="flex">
+          @if(wizard.species){<span class="bg-tag1 text-white text-base font-medium me-2 px-3 py-2 rounded-full">{{wizard.species}}</span>}
+          @if(wizard.wizard){<span class="bg-tag2 text-white text-base font-medium me-2 px-3 py-2 rounded-full">Wizard</span>}
+          @if(wizard.house){<span class="bg-tag3 text-white text-base font-medium me-2 px-3 py-2 rounded-full">{{wizard.house}}</span>}
+        </div>
+      </div>
+      <div class="p-5 bg-bgPrimary border border-borderPrimary rounded-lg shadow-lg font-medium text-base leading-6 sm:text-xl sm:leading-7 hover:cursor-pointer divide-y divide-borderPrimary">
+          <div class="flex justify-between pb-3 sm:pb-4">
+            <p class="text-textPrimary">Gender</p>
+            <p class="text-titlePrimary">{{wizard.gender || '-'}}</p>
+          </div>
+          <div class="flex justify-between py-3 sm:py-4">
+            <p class="text-textPrimary">Birth</p>
+            <p class="text-titlePrimary">{{wizard.dateOfBirth || '-'}}</p>
+          </div>
+          <div class="flex justify-between py-3 sm:py-4">
+            <p class="text-textPrimary">Ancestry</p>
+            <p class="text-titlePrimary">{{wizard.ancestry || '-'}}</p>
+          </div>
+          <div class="flex justify-between py-3 sm:py-4">
+            <p class="text-textPrimary">Eye colour</p>
+            <p class="text-titlePrimary">{{wizard.eyeColour || '-'}}</p>
+          </div>
+          <div class="flex justify-between py-3 sm:py-4">
+            <p class="text-textPrimary">Hair colour</p>
+            <p class="text-titlePrimary">{{wizard.hairColour || '-'}}</p>
+          </div>
+          <div class="flex justify-between pt-3 sm:pt-4">
+            <p class="text-textPrimary">Patronus</p>
+            <p class="text-titlePrimary">{{wizard.patronus || '-'}}</p>
+          </div>
+        </div>
+    </div>
+  }
 </ion-content>

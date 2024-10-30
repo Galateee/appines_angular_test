@@ -16,6 +16,9 @@ module.exports = {
         textPrimary: '#53A7BC',
         borderPrimary: '#4B91A1',
         titlePrimary: '#DBE6E9',
+        tag1: '#C64191',
+        tag2: '#9C95DC',
+        tag3: '#53A7BC',
       }
     },
   },
