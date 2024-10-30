@@ -1,5 +1,5 @@
 <ion-content [fullscreen]="true">
-  @if(wizard){
+  @if(wizard()){
 
     <div class="relative">
       <ion-toolbar class="absolute m-4 mt-12 tablet:m-8 tablet:mt-12">
@@ -7,7 +7,7 @@
           <ion-back-button defaultHref="/" text="" icon="chevron-back-outline" style="color: white;"></ion-back-button>
         </ion-buttons>
       </ion-toolbar>
-      <img src="{{ wizard.image || '/assets/blank-avatar-photo-place-holder.webp' }}" class="w-full aspect-video min-h-[340px] max-h-[460px] object-cover"  style="object-position: 50% 40%;"/>
+      <img [src]="wizard()?.image || '/assets/blank-avatar-photo-place-holder.webp'" class="w-full aspect-video min-h-[340px] max-h-[460px] object-cover"  style="object-position: 50% 40%;"/>
       <div class="absolute inset-x-0 bottom-[-1px] h-1/4 bg-gradient-to-b from-transparent to-[#132D32]"></div>
     </div>
 
@@ -15,40 +15,40 @@
 
       <div class="pb-9">
         <div class="pt-4">
-          <h1 size="large" class="text-[#F6F8F9] text-[28px] tablet:text-3xl mb-2 tablet:mb-3 font-montserrat font-bold">{{wizard.name}}</h1>
-          <p class="pb-5 text-white text-base tablet:text-lg font-normal">{{formatAlternateNames(wizard.alternate_names)}}</p>
+          <h1 size="large" class="text-[#F6F8F9] text-[28px] tablet:text-3xl mb-2 tablet:mb-3 font-montserrat font-bold">{{wizard()?.name}}</h1>
+          <p class="pb-5 text-white text-base tablet:text-lg font-normal">{{formatAlternateNames(wizard()?.alternate_names || '-')}}</p>
         </div>
         <div class="flex">
-          @if(wizard.species){<span class="bg-tag1 text-white text-base tablet:text-lg font-medium me-2 tablet:me-3 px-3 py-2 tablet:px-4 tablet:py-2.5 rounded-full">{{wizard.species}}</span>}
-          @if(wizard.wizard){<span class="bg-tag2 text-white text-base tablet:text-lg font-medium me-2 tablet:me-3 px-3 py-2 tablet:px-4 tablet:py-2.5 rounded-full">Wizard</span>}
-          @if(wizard.house){<span class="bg-tag3 text-white text-base tablet:text-lg font-medium me-2 tablet:me-3 px-3 py-2 tablet:px-4 tablet:py-2.5 rounded-full">{{wizard.house}}</span>}
+          @if(wizard()?.species){<span class="bg-tag1 text-white text-base tablet:text-lg font-medium me-2 tablet:me-3 px-3 py-2 tablet:px-4 tablet:py-2.5 rounded-full">{{wizard()?.species}}</span>}
+          @if(wizard()?.wizard){<span class="bg-tag2 text-white text-base tablet:text-lg font-medium me-2 tablet:me-3 px-3 py-2 tablet:px-4 tablet:py-2.5 rounded-full">Wizard</span>}
+          @if(wizard()?.house){<span class="bg-tag3 text-white text-base tablet:text-lg font-medium me-2 tablet:me-3 px-3 py-2 tablet:px-4 tablet:py-2.5 rounded-full">{{wizard()?.house}}</span>}
         </div>
       </div>
 
       <div class="p-5 tablet:p-6 bg-wizardDetailsCard-bgPrimary border border-wizardDetailsCard-borderPrimary rounded-lg shadow-lg divide-y divide-wizardDetailsCard-spliterPrimary text-base tablet:text-lg font-medium">
           <div class="flex justify-between pb-4 tablet:pb-5">
             <p class="text-wizardDetailsCard-titlePrimary">Gender</p>
-            <p class="text-wizardDetailsCard-textPrimary">{{wizard.gender || '-'}}</p>
+            <p class="text-wizardDetailsCard-textPrimary">{{wizard()?.gender || '-'}}</p>
           </div>
           <div class="flex justify-between py-4 tablet:py-5">
             <p class="text-wizardDetailsCard-titlePrimary">Birth</p>
-            <p class="text-wizardDetailsCard-textPrimary">{{formatDate(wizard.dateOfBirth)}}</p>
+            <p class="text-wizardDetailsCard-textPrimary">{{formatDate(wizard()?.dateOfBirth || '')}}</p>
           </div>
           <div class="flex justify-between py-4 tablet:py-5">
             <p class="text-wizardDetailsCard-titlePrimary">Ancestry</p>
-            <p class="text-wizardDetailsCard-textPrimary">{{wizard.ancestry || '-'}}</p>
+            <p class="text-wizardDetailsCard-textPrimary">{{wizard()?.ancestry || '-'}}</p>
           </div>
           <div class="flex justify-between py-4 tablet:py-5">
             <p class="text-wizardDetailsCard-titlePrimary">Eye colour</p>
-            <p class="text-wizardDetailsCard-textPrimary">{{wizard.eyeColour || '-'}}</p>
+            <p class="text-wizardDetailsCard-textPrimary">{{wizard()?.eyeColour || '-'}}</p>
           </div>
           <div class="flex justify-between py-4 tablet:py-5">
             <p class="text-wizardDetailsCard-titlePrimary">Hair colour</p>
-            <p class="text-wizardDetailsCard-textPrimary">{{wizard.hairColour || '-'}}</p>
+            <p class="text-wizardDetailsCard-textPrimary">{{wizard()?.hairColour || '-'}}</p>
           </div>
           <div class="flex justify-between pt-4 tablet:pt-5">
             <p class="text-wizardDetailsCard-titlePrimary">Patronus</p>
-            <p class="text-wizardDetailsCard-textPrimary">{{wizard.patronus || '-'}}</p>
+            <p class="text-wizardDetailsCard-textPrimary">{{wizard()?.patronus || '-'}}</p>
           </div>
         </div>
         

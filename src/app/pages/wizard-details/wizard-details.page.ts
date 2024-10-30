@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { IonContent, IonHeader, IonTitle, IonToolbar, IonCard, IonCardHeader, IonCardTitle, IonCardContent, IonButtons, IonBackButton } from '@ionic/angular/standalone';
@@ -17,8 +17,7 @@ import {chevronBackOutline} from 'ionicons/icons';
 })
 
 export class WizardDetailsPage implements OnInit {
-  // signal ???
-  wizard!: Wizard;
+  wizard = signal<Wizard | null>(null);
   
   constructor(private route: ActivatedRoute, private wizardsService: WizardsService) { 
     addIcons({chevronBackOutline, });
@@ -33,8 +32,9 @@ export class WizardDetailsPage implements OnInit {
 
   getWizardDetails(id: string) {
     this.wizardsService.getWizardById(id).subscribe((data: Wizard) => {
-      this.wizard = this.transformWizardData(data);
-      console.log('Wizard data:',this.wizard);
+      const transformedData = this.transformWizardData(data);
+      this.wizard.set(transformedData);
+      console.log('Wizard data:', transformedData);
     });
   }
 
@@ -69,17 +69,13 @@ export class WizardDetailsPage implements OnInit {
     if (!dateString) {
       return '-';
     }
-
     const months = [
       'January', 'February', 'March', 'April', 'May', 'June',
       'July', 'August', 'September', 'October', 'November', 'December'
     ];
-
     const [day, month, year] = dateString.split('-');
     const monthIndex = parseInt(month, 10) - 1;
-
     const suffix = this.getDateSuffix(parseInt(day, 10));
-
     return `${months[monthIndex]} ${day}${suffix} ${year}`;
   }
 
@@ -92,5 +88,4 @@ export class WizardDetailsPage implements OnInit {
       default: return 'th';
     }
   }
-  
 }
